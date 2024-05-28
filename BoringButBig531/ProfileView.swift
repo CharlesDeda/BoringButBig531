@@ -2,12 +2,7 @@ import SwiftUI
 
 struct ProfileView: View {
   let columns = [GridItem(.flexible(), spacing: 0), GridItem(.flexible(), spacing: 0)]
-  @State var lifts: [Lift] = [
-    Lift(id: UUID(), name: "Deadlift"),
-    Lift(id: UUID(), name: "Squat"),
-    Lift(id: UUID(), name: "Bench"),
-    Lift(id: UUID(), name: "Press")
-  ]
+ @Binding var lifts: [Lift]
   
   var body: some View {
     ScrollView {
@@ -55,7 +50,12 @@ struct ProfileView: View {
 struct ProfileView_Previews: PreviewProvider {
   static var previews: some View {
     NavigationStack {
-      ProfileView()
+      ProfileView(lifts: .constant([
+        Lift(id: UUID(), name: "Deadlift"),
+        Lift(id: UUID(), name: "Squat"),
+        Lift(id: UUID(), name: "Bench"),
+        Lift(id: UUID(), name: "Press")
+      ]))
     }
   }
 }

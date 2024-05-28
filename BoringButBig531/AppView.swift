@@ -1,19 +1,24 @@
 import SwiftUI
 
 struct AppView: View {
-  @State var isProfileComplete = false
+  @State var lifts: [Lift] = [
+    Lift(id: UUID(), name: "Deadlift"),
+    Lift(id: UUID(), name: "Squat"),
+    Lift(id: UUID(), name: "Bench"),
+    Lift(id: UUID(), name: "Press")
+  ]
+  var isProfileComplete: Bool {
+    !lifts.allSatisfy { $0.oneRepMax == 0 }
+  }
   
   var body: some View {
     NavigationStack {
       Group {
         if isProfileComplete {
-          WorkoutListView()
+          WorkoutListView(lifts: $lifts)
         } else {
-          EmptyProfileView()
+          EmptyProfileView(lifts: $lifts)
         }
-      }
-      .onAppear {
-        self.isProfileComplete = true
       }
     }
   }
