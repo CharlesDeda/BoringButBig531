@@ -1,35 +1,4 @@
-//
-//  ContentView.swift
-//  BoringButBig531
-//
-//  Created by Nick Deda on 5/28/24.
-//
-
 import SwiftUI
-
-
-struct ContentView: View {
-  
-  var body: some View {
-    NavigationStack {
-      ProfileView()
-      .navigationTitle("Profile")
-    }
-  }
-}
-
-struct Lift: Identifiable {
-  let id: UUID
-  var name: String
-  var weight = 0.0
-  var reps = 0.0
-  
-  var oneRepMax: Double {
-    weight * reps
-    //Nick
-  }
-}
-
 
 struct ProfileView: View {
   let columns = [GridItem(.flexible(), spacing: 0), GridItem(.flexible(), spacing: 0)]
@@ -39,7 +8,7 @@ struct ProfileView: View {
     Lift(id: UUID(), name: "Bench"),
     Lift(id: UUID(), name: "Press")
   ]
-
+  
   var body: some View {
     ScrollView {
       LazyVGrid(columns: columns, spacing: 0) {
@@ -78,13 +47,15 @@ struct ProfileView: View {
         }
       }
       .padding(.horizontal)
+      .navigationTitle("Profile")
     }
   }
 }
 
-
-struct ContentView_Previews: PreviewProvider {
+struct ProfileView_Previews: PreviewProvider {
   static var previews: some View {
-    ContentView()
+    NavigationStack {
+      ProfileView()
+    }
   }
 }

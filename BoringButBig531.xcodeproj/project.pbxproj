@@ -7,18 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F9D6D4932C0647F40027C8F6 /* BoringButBig531App.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D6D4922C0647F40027C8F6 /* BoringButBig531App.swift */; };
-		F9D6D4952C0647F40027C8F6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D6D4942C0647F40027C8F6 /* ContentView.swift */; };
+		F9D6D4932C0647F40027C8F6 /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D6D4922C0647F40027C8F6 /* Main.swift */; };
+		F9D6D4952C0647F40027C8F6 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D6D4942C0647F40027C8F6 /* AppView.swift */; };
 		F9D6D4972C0647F60027C8F6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9D6D4962C0647F60027C8F6 /* Assets.xcassets */; };
 		F9D6D49A2C0647F60027C8F6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9D6D4992C0647F60027C8F6 /* Preview Assets.xcassets */; };
+		F9D6D4A22C065C770027C8F6 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D6D4A12C065C770027C8F6 /* ProfileView.swift */; };
+		F9D6D4A42C065D210027C8F6 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D6D4A32C065D210027C8F6 /* Models.swift */; };
+		F9D6D4A62C065FCA0027C8F6 /* EmptyProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D6D4A52C065FCA0027C8F6 /* EmptyProfileView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		F9D6D48F2C0647F40027C8F6 /* BoringButBig531.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoringButBig531.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		F9D6D4922C0647F40027C8F6 /* BoringButBig531App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoringButBig531App.swift; sourceTree = "<group>"; };
-		F9D6D4942C0647F40027C8F6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		F9D6D4922C0647F40027C8F6 /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
+		F9D6D4942C0647F40027C8F6 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
 		F9D6D4962C0647F60027C8F6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F9D6D4992C0647F60027C8F6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		F9D6D4A12C065C770027C8F6 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		F9D6D4A32C065D210027C8F6 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		F9D6D4A52C065FCA0027C8F6 /* EmptyProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyProfileView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,8 +57,11 @@
 		F9D6D4912C0647F40027C8F6 /* BoringButBig531 */ = {
 			isa = PBXGroup;
 			children = (
-				F9D6D4922C0647F40027C8F6 /* BoringButBig531App.swift */,
-				F9D6D4942C0647F40027C8F6 /* ContentView.swift */,
+				F9D6D4922C0647F40027C8F6 /* Main.swift */,
+				F9D6D4942C0647F40027C8F6 /* AppView.swift */,
+				F9D6D4A52C065FCA0027C8F6 /* EmptyProfileView.swift */,
+				F9D6D4A12C065C770027C8F6 /* ProfileView.swift */,
+				F9D6D4A32C065D210027C8F6 /* Models.swift */,
 				F9D6D4962C0647F60027C8F6 /* Assets.xcassets */,
 				F9D6D4982C0647F60027C8F6 /* Preview Content */,
 			);
@@ -137,8 +146,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F9D6D4952C0647F40027C8F6 /* ContentView.swift in Sources */,
-				F9D6D4932C0647F40027C8F6 /* BoringButBig531App.swift in Sources */,
+				F9D6D4A62C065FCA0027C8F6 /* EmptyProfileView.swift in Sources */,
+				F9D6D4952C0647F40027C8F6 /* AppView.swift in Sources */,
+				F9D6D4A22C065C770027C8F6 /* ProfileView.swift in Sources */,
+				F9D6D4932C0647F40027C8F6 /* Main.swift in Sources */,
+				F9D6D4A42C065D210027C8F6 /* Models.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
