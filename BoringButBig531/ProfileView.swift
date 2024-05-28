@@ -2,54 +2,65 @@ import SwiftUI
 
 struct ProfileView: View {
   let columns = [GridItem(.flexible(), spacing: 0), GridItem(.flexible(), spacing: 0)]
- @Binding var lifts: [Lift]
+  @Binding var lifts: [Lift]
+  @Environment(\.dismiss) var dismiss
   
   var body: some View {
-    ScrollView {
-      LazyVGrid(columns: columns, spacing: 0) {
-        ForEach($lifts) { $value in
-          VStack {
-            Text(value.name)
-              .font(.headline)
-            HStack {
-              Text("Weight")
-                .bold()
-                .frame(width: 80, alignment: .leading)
-              TextField("\(value.weight)", value: $value.weight, formatter: NumberFormatter())
+    NavigationStack {
+      ScrollView {
+        LazyVGrid(columns: columns, spacing: 0) {
+          ForEach($lifts) { $value in
+            VStack {
+              Text(value.name)
+                .font(.headline)
+              HStack {
+                Text("Weight")
+                  .bold()
+                  .frame(width: 80, alignment: .leading)
+                TextField("\(value.weight)", value: $value.weight, formatter: NumberFormatter())
+              }
+              HStack {
+                Text("Reps")
+                  .bold()
+                  .frame(width: 80, alignment: .leading)
+                TextField("\(value.reps)", value: $value.reps, formatter: NumberFormatter())
+              }
+              HStack {
+                Text("1rm")
+                  .bold()
+                  .frame(maxWidth: .infinity, alignment: .leading)
+                Text("\(value.oneRepMax.description)")
+              }
             }
-            HStack {
-              Text("Reps")
-                .bold()
-                .frame(width: 80, alignment: .leading)
-              TextField("\(value.reps)", value: $value.reps, formatter: NumberFormatter())
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .padding()
+            .background {
+              Color(.systemGray5)
             }
-            HStack {
-              Text("1rm")
-                .bold()
-                .frame(maxWidth: .infinity, alignment: .leading)
-              Text("\(value.oneRepMax.description)")
+            .textFieldStyle(.roundedBorder)
+            .multilineTextAlignment(.trailing)
+            .cornerRadius(8)
+            .padding(8)
+          }
+        }
+        .padding(.horizontal)
+        .navigationTitle("Profile")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+          ToolbarItem(placement: .cancellationAction) {
+            Button("Cancel") {
+              dismiss()
             }
           }
-          .frame(maxWidth: .infinity, maxHeight: .infinity)
-          .padding()
-          .background {
-            Color(.systemGray5)
-          }
-          .textFieldStyle(.roundedBorder)
-          .multilineTextAlignment(.trailing)
-          .cornerRadius(8)
-          .padding(8)
         }
       }
-      .padding(.horizontal)
-      .navigationTitle("Profile")
     }
   }
 }
 
 struct ProfileView_Previews: PreviewProvider {
   static var previews: some View {
-    NavigationStack {
+    Text("Hello World").sheet(isPresented: .constant(true)) {
       ProfileView(lifts: .constant([
         Lift(id: UUID(), name: "Deadlift"),
         Lift(id: UUID(), name: "Squat"),

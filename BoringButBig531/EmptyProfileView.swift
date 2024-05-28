@@ -2,6 +2,7 @@ import SwiftUI
 
 struct EmptyProfileView: View {
   @Binding var lifts: [Lift]
+  @State var isSheetPresented = false
   
   var body: some View {
     VStack(spacing: 16) {
@@ -13,7 +14,9 @@ struct EmptyProfileView: View {
         .foregroundColor(.secondary)
         .padding(.bottom)
       
-      NavigationLink(destination: { ProfileView(lifts: $lifts) }) {
+      Button(action: {
+        isSheetPresented.toggle()
+      }) {
         Text("Edit Profile")
       }
       .buttonStyle(.borderedProminent)
@@ -21,6 +24,16 @@ struct EmptyProfileView: View {
     }
     .navigationTitle("Home")
     .multilineTextAlignment(.center)
+    .sheet(isPresented: $isSheetPresented, content: {
+      ProfileView(lifts: $lifts)
+    })
+    .toolbar {
+      Button(action: {
+        isSheetPresented.toggle()
+      }) {
+        Image(systemName: "person.crop.circle")
+      }
+    }
   }
 }
 

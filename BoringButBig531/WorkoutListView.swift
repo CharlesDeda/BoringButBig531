@@ -2,6 +2,7 @@ import SwiftUI
 
 struct WorkoutListView: View {
   @Binding var lifts: [Lift]
+  @State var isSheetPresented = false
   
   var body: some View {
     List {
@@ -13,8 +14,13 @@ struct WorkoutListView: View {
       }
     }
     .navigationTitle("Home")
+    .sheet(isPresented: $isSheetPresented, content: {
+      ProfileView(lifts: $lifts)
+    })
     .toolbar {
-      NavigationLink(destination: { ProfileView(lifts: $lifts) }) {
+      Button(action: {
+        isSheetPresented.toggle()
+      }) {
         Image(systemName: "person.crop.circle")
       }
     }
