@@ -7,7 +7,7 @@ struct AppView: View {
     NavigationStack {
       Group {
         if isProfileComplete {
-          Text("It's done")
+          WorkoutListView()
         } else {
           EmptyProfileView()
         }
