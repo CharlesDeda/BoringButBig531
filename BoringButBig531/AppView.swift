@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct AppView: View {
+  @State var isSheetPresented = false
   @State var lifts: [Lift] = [
     Lift(id: UUID(), name: "Deadlift"),
     Lift(id: UUID(), name: "Squat"),
@@ -15,11 +16,14 @@ struct AppView: View {
     NavigationStack {
       Group {
         if isProfileComplete {
-          WorkoutListView(lifts: $lifts)
+          WorkoutListView(lifts: $lifts, isSheetPresented: $isSheetPresented)
         } else {
-          EmptyProfileView(lifts: $lifts)
+          EmptyProfileView(lifts: $lifts, isSheetPresented: $isSheetPresented)
         }
       }
+      .sheet(isPresented: $isSheetPresented, content: {
+        ProfileView(lifts: $lifts)
+      })
     }
   }
 }

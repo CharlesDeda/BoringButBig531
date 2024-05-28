@@ -2,7 +2,7 @@ import SwiftUI
 
 struct EmptyProfileView: View {
   @Binding var lifts: [Lift]
-  @State var isSheetPresented = false
+  @Binding var isSheetPresented: Bool
   
   var body: some View {
     VStack(spacing: 16) {
@@ -24,9 +24,7 @@ struct EmptyProfileView: View {
     }
     .navigationTitle("Home")
     .multilineTextAlignment(.center)
-    .sheet(isPresented: $isSheetPresented, content: {
-      ProfileView(lifts: $lifts)
-    })
+
     .toolbar {
       Button(action: {
         isSheetPresented.toggle()
@@ -40,12 +38,15 @@ struct EmptyProfileView: View {
 struct EmptyProfileView_Previews: PreviewProvider {
   static var previews: some View {
     NavigationStack {
-      EmptyProfileView(lifts: .constant([
-        Lift(id: UUID(), name: "Deadlift"),
-        Lift(id: UUID(), name: "Squat"),
-        Lift(id: UUID(), name: "Bench"),
-        Lift(id: UUID(), name: "Press")
-      ]))
+      EmptyProfileView(
+        lifts: .constant([
+          Lift(id: UUID(), name: "Deadlift"),
+          Lift(id: UUID(), name: "Squat"),
+          Lift(id: UUID(), name: "Bench"),
+          Lift(id: UUID(), name: "Press")
+        ]),
+        isSheetPresented: .constant(false)
+      )
     }
   }
 }
