@@ -12,7 +12,7 @@ struct ContentView: View {
   
   var body: some View {
     NavigationStack {
-      VerticalSmileys()
+      ProfileView()
       .navigationTitle("Profile")
     }
   }
@@ -20,46 +20,65 @@ struct ContentView: View {
 
 struct Lift: Identifiable {
   let id: UUID
-  let name: String
-  let oneRepMax: Double
+  var name: String
+  var weight = 0.0
+  var reps = 0.0
+  
+  var oneRepMax: Double {
+    weight * reps
+    //Nick
+  }
 }
 
 
-struct VerticalSmileys: View {
+struct ProfileView: View {
   let columns = [GridItem(.flexible(), spacing: 0), GridItem(.flexible(), spacing: 0)]
-  let lifts: [Lift] = [
-    Lift(id: UUID(), name: "Deadlift", oneRepMax: 565),
-    Lift(id: UUID(), name: "Squat", oneRepMax: 485),
-    Lift(id: UUID(), name: "Bench", oneRepMax: 315),
-    Lift(id: UUID(), name: "Press", oneRepMax: 205),
-
+  @State var lifts: [Lift] = [
+    Lift(id: UUID(), name: "Deadlift"),
+    Lift(id: UUID(), name: "Squat"),
+    Lift(id: UUID(), name: "Bench"),
+    Lift(id: UUID(), name: "Press")
   ]
-  
+
   var body: some View {
     ScrollView {
       LazyVGrid(columns: columns, spacing: 0) {
-        ForEach(lifts) { value in
+        ForEach($lifts) { $value in
           VStack {
             Text(value.name)
-            Text("\(value.oneRepMax)")
+              .font(.headline)
+            HStack {
+              Text("Weight")
+                .bold()
+                .frame(width: 80, alignment: .leading)
+              TextField("\(value.weight)", value: $value.weight, formatter: NumberFormatter())
+            }
+            HStack {
+              Text("Reps")
+                .bold()
+                .frame(width: 80, alignment: .leading)
+              TextField("\(value.reps)", value: $value.reps, formatter: NumberFormatter())
+            }
+            HStack {
+              Text("1rm")
+                .bold()
+                .frame(maxWidth: .infinity, alignment: .leading)
+              Text("\(value.oneRepMax.description)")
+            }
           }
           .frame(maxWidth: .infinity, maxHeight: .infinity)
           .padding()
           .background {
             Color(.systemGray5)
           }
+          .textFieldStyle(.roundedBorder)
+          .multilineTextAlignment(.trailing)
           .cornerRadius(8)
           .padding(8)
         }
       }
       .padding(.horizontal)
     }
-  }
-  
-  
-  private func emoji(_ value: Int) -> String {
-    guard let scalar = UnicodeScalar(value) else { return "?" }
-    return String(Character(scalar))
   }
 }
 
