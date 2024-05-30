@@ -5,13 +5,14 @@ struct ProfileView: View {
   @Binding var lifts: [Lift]
   @Environment(\.dismiss) var dismiss
   
+  
   var body: some View {
     NavigationStack {
       ScrollView {
         LazyVGrid(columns: columns, spacing: 0) {
           ForEach($lifts) { $value in
             VStack {
-              Text(value.name)
+              Text(value.name.description)
                 .font(.headline)
               HStack {
                 Text("Weight")
@@ -62,10 +63,10 @@ struct ProfileView_Previews: PreviewProvider {
   static var previews: some View {
     Text("Hello World").sheet(isPresented: .constant(true)) {
       ProfileView(lifts: .constant([
-        Lift(id: UUID(), name: "Deadlift"),
-        Lift(id: UUID(), name: "Squat"),
-        Lift(id: UUID(), name: "Bench"),
-        Lift(id: UUID(), name: "Press")
+        Lift(id: UUID(), name: .deadlift),
+        Lift(id: UUID(), name: .squat),
+        Lift(id: UUID(), name: .bench),
+        Lift(id: UUID(), name: .press)
       ]))
     }
   }

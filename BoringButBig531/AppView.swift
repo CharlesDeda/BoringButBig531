@@ -3,10 +3,10 @@ import SwiftUI
 struct AppView: View {
   @State var isSheetPresented = false
   @State var lifts: [Lift] = [
-    Lift(id: UUID(), name: "Deadlift"),
-    Lift(id: UUID(), name: "Squat"),
-    Lift(id: UUID(), name: "Bench"),
-    Lift(id: UUID(), name: "Press")
+    Lift(id: UUID(), name: .deadlift),
+    Lift(id: UUID(), name: .squat),
+    Lift(id: UUID(), name: .bench),
+    Lift(id: UUID(), name: .press)
   ]
   var isProfileComplete: Bool {
     !lifts.allSatisfy { $0.oneRepMax == 0 }
@@ -16,7 +16,7 @@ struct AppView: View {
     NavigationStack {
       Group {
         if isProfileComplete {
-          WorkoutListView(lifts: $lifts, isSheetPresented: $isSheetPresented)
+          HomeView(lifts: $lifts, isSheetPresented: $isSheetPresented)
         } else {
           EmptyProfileView(lifts: $lifts, isSheetPresented: $isSheetPresented)
         }

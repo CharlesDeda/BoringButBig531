@@ -40,10 +40,10 @@ struct EmptyProfileView_Previews: PreviewProvider {
     NavigationStack {
       EmptyProfileView(
         lifts: .constant([
-          Lift(id: UUID(), name: "Deadlift"),
-          Lift(id: UUID(), name: "Squat"),
-          Lift(id: UUID(), name: "Bench"),
-          Lift(id: UUID(), name: "Press")
+          Lift(id: UUID(), name: .deadlift),
+          Lift(id: UUID(), name: .squat),
+          Lift(id: UUID(), name: .bench),
+          Lift(id: UUID(), name: .press)
         ]),
         isSheetPresented: .constant(false)
       )
