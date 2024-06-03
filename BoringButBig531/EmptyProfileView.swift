@@ -1,8 +1,7 @@
 import SwiftUI
 
 struct EmptyProfileView: View {
-  @Binding var lifts: [Lift]
-  @Binding var isSheetPresented: Bool
+  @StateObject var appStore: AppStore
   
   var body: some View {
     VStack(spacing: 16) {
@@ -15,7 +14,7 @@ struct EmptyProfileView: View {
         .padding(.bottom)
       
       Button(action: {
-        isSheetPresented.toggle()
+        appStore.isSheetPresented.toggle()
       }) {
         Text("Edit Profile")
       }
@@ -27,7 +26,7 @@ struct EmptyProfileView: View {
 
     .toolbar {
       Button(action: {
-        isSheetPresented.toggle()
+        appStore.isSheetPresented.toggle()
       }) {
         Image(systemName: "person.crop.circle")
       }
@@ -38,15 +37,7 @@ struct EmptyProfileView: View {
 struct EmptyProfileView_Previews: PreviewProvider {
   static var previews: some View {
     NavigationStack {
-      EmptyProfileView(
-        lifts: .constant([
-          Lift(id: UUID(), name: .deadlift),
-          Lift(id: UUID(), name: .squat),
-          Lift(id: UUID(), name: .bench),
-          Lift(id: UUID(), name: .press)
-        ]),
-        isSheetPresented: .constant(false)
-      )
+      EmptyProfileView(appStore: AppStore())
     }
   }
 }

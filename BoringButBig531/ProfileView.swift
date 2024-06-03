@@ -1,16 +1,20 @@
 import SwiftUI
 
 struct ProfileView: View {
+  @StateObject var appStore: AppStore
   let columns = [GridItem(.flexible(), spacing: 0), GridItem(.flexible(), spacing: 0)]
-  @Binding var lifts: [Lift]
   @Environment(\.dismiss) var dismiss
-  
   
   var body: some View {
     NavigationStack {
+      TextField("Please enter your name here", text: $appStore.name)
+        .textFieldStyle(.roundedBorder)
+        .cornerRadius(8)
+        .padding()
+        .frame(width: 200, alignment: .trailing)
       ScrollView {
         LazyVGrid(columns: columns, spacing: 0) {
-          ForEach($lifts) { $value in
+          ForEach($appStore.lifts) { $value in
             VStack {
               Text(value.name.description)
                 .font(.headline)
@@ -19,6 +23,7 @@ struct ProfileView: View {
                   .bold()
                   .frame(width: 80, alignment: .leading)
                 TextField("\(value.weight)", value: $value.weight, formatter: NumberFormatter())
+                  .border(.yellow)
               }
               HStack {
                 Text("Reps")
@@ -52,6 +57,13 @@ struct ProfileView: View {
             Button("Cancel") {
               dismiss()
             }
+            .toolbar {
+              ToolbarItem(placement: .confirmationAction) {
+                Button("Save") {
+                  dismiss()
+                }
+              }
+            }
           }
         }
       }
@@ -62,12 +74,7 @@ struct ProfileView: View {
 struct ProfileView_Previews: PreviewProvider {
   static var previews: some View {
     Text("Hello World").sheet(isPresented: .constant(true)) {
-      ProfileView(lifts: .constant([
-        Lift(id: UUID(), name: .deadlift),
-        Lift(id: UUID(), name: .squat),
-        Lift(id: UUID(), name: .bench),
-        Lift(id: UUID(), name: .press)
-      ]))
+      ProfileView(appStore: AppStore())
     }
   }
 }

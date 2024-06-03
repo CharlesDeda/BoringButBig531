@@ -1,10 +1,8 @@
 import SwiftUI
 
 struct HomeView: View {
-  @Binding var lifts: [Lift]
+  @StateObject var appStore: AppStore
   let weeks = [1,2,3,4]
-  @Binding var isSheetPresented: Bool
-
   
   var body: some View {
     NavigationStack {
@@ -12,7 +10,7 @@ struct HomeView: View {
         ForEach(weeks, id: \.self) { value in
           HStack {
             NavigationLink("Week \(value)") {
-              WorkoutView(lifts: $lifts, selectedWeek: value)
+              WorkoutView(appStore: appStore, selectedWeek: value)
             }
           }
         }
@@ -20,7 +18,7 @@ struct HomeView: View {
       .navigationTitle("Home")
       .toolbar {
         Button(action: {
-          isSheetPresented.toggle()
+          appStore.isSheetPresented.toggle()
         }) {
           Image(systemName: "person.crop.circle")
         }
@@ -32,15 +30,7 @@ struct HomeView: View {
 struct WorkoutListView_Previews: PreviewProvider {
   static var previews: some View {
     NavigationStack {
-      HomeView(
-        lifts: .constant([
-          Lift(id: UUID(), name: .deadlift),
-          Lift(id: UUID(), name: .squat),
-          Lift(id: UUID(), name: .bench),
-          Lift(id: UUID(), name: .press)
-        ]),
-        isSheetPresented: .constant(false)
-      )
+      HomeView(appStore: AppStore())
     }
   }
 }

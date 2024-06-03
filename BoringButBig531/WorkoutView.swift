@@ -8,16 +8,17 @@
 import SwiftUI
 
 struct WorkoutView: View {
-  @Binding var lifts: [Lift]
-  @Environment(\.dismiss) var dismiss
+  @StateObject var appStore: AppStore
   let selectedWeek: Int
+  @Environment(\.dismiss) var dismiss
+
   
   var body: some View {
     List {
-      ForEach(lifts) { lift in
+      ForEach(appStore.lifts) { lift in
         Section(lift.weekday) {
           NavigationLink(lift.name.description) {
-            PlanView(lift: getLift(name: lift.name, lifts: lifts) ?? Lift(id: UUID(), name: .deadlift), selectedWeek: selectedWeek)
+            PlanView(lift: getLift(name: lift.name, lifts: appStore.lifts) ?? Lift(id: UUID(), name: .deadlift), selectedWeek: selectedWeek)
           }
         }
       }
@@ -25,51 +26,18 @@ struct WorkoutView: View {
     .navigationTitle("Week \(selectedWeek)")
     .toolbar {
       ToolbarItem(placement: .navigationBarLeading) {
-        HomeView(lifts: $lifts, isSheetPresented: .constant(true))
+        HomeView(appStore: appStore)
       }
     }
   }
 }
-
-extension Lift {
-  var weekday: String {
-    switch name {
-
-    case .deadlift:
-      return "Monday"
-    case .squat:
-      return "Tuesday"
-    case .bench:
-      return "Thursday"
-    case .press:
-      return "Friday"
-    }
-  }
   
-//  var weekday: String {
-//    if name == .deadlift {
-//      return "Monday"
-//    } else if name == .squat {
-//      return "Tuesday"
-//    } else if name == .bench {
-//      return "Thursday"
-//    } else if name == .press {
-//      return "Friday"
-//    } else {
-//      return "Nothing"
-//    }
-//  }
-}
+
 
 struct HomeView_Previews: PreviewProvider {
   static var previews: some View {
     NavigationStack {
-      WorkoutView(lifts: .constant([
-        Lift(id: UUID(), name: .deadlift),
-        Lift(id: UUID(), name: .squat),
-        Lift(id: UUID(), name: .bench),
-        Lift(id: UUID(), name: .press)
-      ]), selectedWeek: 1
+      WorkoutView(appStore: AppStore(), selectedWeek: 1
       )
     }
   }

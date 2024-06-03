@@ -1,28 +1,20 @@
 import SwiftUI
 
 struct AppView: View {
-  @State var isSheetPresented = false
-  @State var lifts: [Lift] = [
-    Lift(id: UUID(), name: .deadlift),
-    Lift(id: UUID(), name: .squat),
-    Lift(id: UUID(), name: .bench),
-    Lift(id: UUID(), name: .press)
-  ]
-  var isProfileComplete: Bool {
-    !lifts.allSatisfy { $0.oneRepMax == 0 }
-  }
+  @StateObject var appStore = AppStore()
+  @State var name = ""
   
   var body: some View {
     NavigationStack {
       Group {
-        if isProfileComplete {
-          HomeView(lifts: $lifts, isSheetPresented: $isSheetPresented)
+        if appStore.isProfileComplete {
+          HomeView(appStore: appStore)
         } else {
-          EmptyProfileView(lifts: $lifts, isSheetPresented: $isSheetPresented)
+          EmptyProfileView(appStore: appStore)
         }
       }
-      .sheet(isPresented: $isSheetPresented, content: {
-        ProfileView(lifts: $lifts)
+      .sheet(isPresented: $appStore.isSheetPresented, content: {
+        ProfileView(appStore: appStore)
       })
     }
   }
