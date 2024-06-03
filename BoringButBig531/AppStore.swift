@@ -12,9 +12,20 @@ final class AppStore: ObservableObject {
   ]
   
   @Published var name: String = ""
+  let selectedWeek = 1
 
   var isProfileComplete: Bool {
     !lifts.allSatisfy { $0.oneRepMax == 0 }
   }
+  
 
+  
+  func getLift(name: LiftType) -> Lift? {
+    for lift in lifts {
+      if lift.name == name {
+        return lift
+      }
+    }
+    return nil
+  }
 }

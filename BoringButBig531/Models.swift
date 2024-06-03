@@ -41,6 +41,17 @@ struct Lift: Identifiable {
   }
 }
 
+enum LiftType: String, CustomStringConvertible, Equatable {
+  var description: String {
+    rawValue.capitalized
+  }
+  
+  case deadlift
+  case squat
+  case bench
+  case press
+}
+
 extension Lift {
   var weekday: String {
     switch name {
@@ -55,27 +66,7 @@ extension Lift {
       return "Friday"
     }
   }
-  
-  enum LiftType: String, CustomStringConvertible, Equatable {
-    var description: String {
-      rawValue.capitalized
-    }
-    
-    case deadlift
-    case squat
-    case bench
-    case press
-  }
-  
-  func getLift(name: LiftType, lifts: [Lift]) -> Lift? {
-    for lift in lifts {
-      if lift.name == name {
-        return lift
-      }
-    }
-    return nil
-  }
-  
+
   struct ExerciseSet {
     let sets: [Int]
   }

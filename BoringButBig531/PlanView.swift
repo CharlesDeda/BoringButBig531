@@ -13,12 +13,12 @@ import SwiftUI
 
 struct PlanView: View {
   @State var lift: Lift
-  let selectedWeek: Int
+  @StateObject var appStore: AppStore
   
   var body: some View {
     VStack {
       List {
-        if let plan = lift.getPlan(week: selectedWeek) {
+        if let plan = lift.getPlan(week: appStore.selectedWeek) {
           ForEach(plan, id: \.self) { value in
             HStack {
               Text(" \(value)")
@@ -35,7 +35,7 @@ struct PlanView: View {
 struct PlanView_Previews: PreviewProvider {
   static var previews: some View {
     NavigationStack {
-      PlanView(lift: Lift(id: UUID(), name: .deadlift), selectedWeek: 1)
+      PlanView(lift: Lift(id: UUID(), name: .deadlift), appStore: AppStore())
     }
   }
 }
