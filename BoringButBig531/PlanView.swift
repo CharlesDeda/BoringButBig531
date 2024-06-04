@@ -21,18 +21,27 @@ struct PlanView: View {
   
   var body: some View {
     VStack {
-      List {
-        ForEach(plan.weights.indices, id: \.self) { index in
-          HStack {
-            Section {
-              Text("\(plan.reps[index])")
-              
-                .frame(maxWidth: .infinity, alignment: .leading)
-              Text("\(plan.weights[index])")
-            }
-          }
+      Table(of: Plan.self) {
+        TableColumn("Weight") { weight in
+          Text("\(weight.weights[0])")
         }
+        TableColumn("Reps") { reps in
+          Text("\(reps.reps[0])")
+        }
+      } rows: {
+        TableRow(Plan(weights: plan.weights, reps: plan.reps))
       }
+      
+
+//      List {
+//        ForEach(plan.weights.indices, id: \.self) { index in
+//          HStack {
+//            Text("\(plan.reps[index])")
+//              .frame(maxWidth: .infinity, alignment: .leading)
+//            Text("\(plan.weights[index])")
+//          }
+//        }
+//      }
     }
     .navigationTitle("Sets")
   }

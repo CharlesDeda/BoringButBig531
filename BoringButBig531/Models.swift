@@ -10,7 +10,7 @@ import Foundation
 
 struct Plan {
   static var empty: Self = .init(weights: [0,0,0,0,0], reps: [0,0,0,0,0])
-  
+  var isComplete = false
   var weights: [Double]
   var reps: [Int]
   
