@@ -18,7 +18,9 @@ final class AppStore: ObservableObject {
     !lifts.allSatisfy { $0.oneRepMax == 0 }
   }
   
-
+  func getPlan(lift: Lift) -> Plan {
+    return lift.getPlan(week: self.selectedWeek)
+  }
   
   func getLift(name: LiftType) -> Lift? {
     for lift in lifts {

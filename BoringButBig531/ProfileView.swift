@@ -23,7 +23,6 @@ struct ProfileView: View {
                   .bold()
                   .frame(width: 80, alignment: .leading)
                 TextField("\(value.weight)", value: $value.weight, formatter: NumberFormatter())
-                  .border(.yellow)
               }
               HStack {
                 Text("Reps")

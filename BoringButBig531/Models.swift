@@ -8,6 +8,28 @@ import Foundation
  week 4: 5,3,3,3,3
  */
 
+struct Plan {
+  static var empty: Self = .init(weights: [0,0,0,0,0], reps: [0,0,0,0,0])
+  
+  var weights: [Double]
+  var reps: [Int]
+  
+  func newSet(oneRepMax: Int) -> Self {
+    var copy = self
+    
+    copy.weights = weights.map {
+      abs($0 * Double(oneRepMax))
+    }
+    return copy
+  }
+}
+
+
+//func getReps(_ lift: Lift) -> (_ week: Int) -> Set? {
+//}
+//
+//func getReps(_ store: AppStore) -> (_ lift: List) -> (_ week: Int) -> Set? {
+//}
 
 struct Lift: Identifiable {
   let id: UUID
@@ -20,25 +42,41 @@ struct Lift: Identifiable {
   var oneRepMax: Int {
     Int(round(weight/(1.0278 - 0.0278 * reps)))
   }
+
+  // June 4, 2024
+  // Lesson
+  // 1. WHERE DO WE PLACE STUFF, ie: lines of code, functions, declarations, types etc ...
+  // 2. Strive to Eliminate Optionals
+  // 3. Use explicit names, ie: LiftSet and not Set, do not define a struct called Struct, or Array or Set
   
-  func getPlan(week: Int) -> [Int]? {
+  func getPlan(week: Int) -> Plan {
     let values = [
-      1: [0.55, 0.65, 0.75, 0.65, 0.55],
-      2: [0.60, 0.70, 0.85, 0.70, 0.60],
-      3: [0.60, 0.75, 0.95, 0.75, 0.60],
-      4: [0.40, 0.50, 0.55, 0.50, 0.40]
+      1: Plan(weights: [0.55, 0.65, 0.75, 0.65, 0.55], reps: [5,5,5,5,5]),
+      2: Plan(weights: [0.60, 0.70, 0.85, 0.70, 0.60], reps: [5,5,3,5,5]),
+      3: Plan(weights: [0.60, 0.75, 0.95, 0.75, 0.60], reps: [5,3,1,3,5]),
+      4: Plan(weights: [0.40, 0.50, 0.55, 0.50, 0.40], reps: [5,5,5,5,5])
     ]
-    return values[week].flatMap { $0.map { abs(Int($0 * Double(oneRepMax))) } }
+    
+    guard let set = values[week]
+    else {
+      return .empty
+    }
+      
+    return set.newSet(oneRepMax: oneRepMax)
   }
-  func getReps(week: Int) -> [Int] {
-    let values = [
-      1: [5, 5, 5, 5, 5],
-      2: [5, 5, 3, 5, 5],
-      3: [5, 3, 1, 3, 5],
-      4: [5, 5, 5, 5, 5]
-    ]
-    return values[week]!
-  }
+//  func getSets(week: Int) -> Set {
+//    let values = [
+//      1: [5,5,5,5,5],
+//      2: [5,5,3,5,5],
+//      3: [5,3,1,3,5],
+//      4: [5,5,5,5,5]
+//    ]
+////    var weights1 = getReps(week: week)
+////    guard let weights = weights1 else {
+////      return nil
+////    }
+//    return Set(weights: getReps(week: week), reps: values[week])
+//  }
 }
 
 enum LiftType: String, CustomStringConvertible, Equatable {

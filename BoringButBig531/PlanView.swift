@@ -15,14 +15,20 @@ struct PlanView: View {
   @State var lift: Lift
   @StateObject var appStore: AppStore
   
+  var plan: Plan {
+    appStore.getPlan(lift: lift)
+  }
+  
   var body: some View {
     VStack {
       List {
-        if let plan = lift.getPlan(week: appStore.selectedWeek) {
-          ForEach(plan, id: \.self) { value in
-            HStack {
-              Text(" \(value)")
-//              Toggle("isDone", isOn: $lift.isComplete)
+        ForEach(plan.weights.indices, id: \.self) { index in
+          HStack {
+            Section {
+              Text("\(plan.reps[index])")
+              
+                .frame(maxWidth: .infinity, alignment: .leading)
+              Text("\(plan.weights[index])")
             }
           }
         }
