@@ -8,7 +8,8 @@ import Foundation
  week 4: 5,3,3,3,3
  */
 
-struct Plan {
+struct Plan: Identifiable {
+  let id = UUID()
   static var empty: Self = .init(weights: [0,0,0,0,0], reps: [0,0,0,0,0])
   var isComplete = false
   var weights: [Double]

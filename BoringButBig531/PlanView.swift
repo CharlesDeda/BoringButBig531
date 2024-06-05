@@ -12,6 +12,7 @@ import SwiftUI
 //}
 
 struct PlanView: View {
+  @Environment(\.dismiss) var dismiss
   @State var lift: Lift
   @StateObject var appStore: AppStore
   
@@ -19,31 +20,14 @@ struct PlanView: View {
     appStore.getPlan(lift: lift)
   }
   
+  
   var body: some View {
-    VStack {
-      Table(of: Plan.self) {
-        TableColumn("Weight") { weight in
-          Text("\(weight.weights[0])")
-        }
-        TableColumn("Reps") { reps in
-          Text("\(reps.reps[0])")
-        }
-      } rows: {
-        TableRow(Plan(weights: plan.weights, reps: plan.reps))
-      }
-      
-
-//      List {
-//        ForEach(plan.weights.indices, id: \.self) { index in
-//          HStack {
-//            Text("\(plan.reps[index])")
-//              .frame(maxWidth: .infinity, alignment: .leading)
-//            Text("\(plan.weights[index])")
-//          }
-//        }
-//      }
+    Table(of: Plan.self) {
+      TableColumn("Weight", value: \.weights.description)
+      TableColumn("Reps", value: \.reps.description)
+    } rows: {
+      TableRow(plan)
     }
-    .navigationTitle("Sets")
   }
 }
 
