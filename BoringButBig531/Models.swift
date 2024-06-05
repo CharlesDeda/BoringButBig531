@@ -65,6 +65,22 @@ struct Lift: Identifiable {
       
     return set.newSet(oneRepMax: oneRepMax)
   }
+  
+  func getBBB(week: Int) -> Plan {
+    let values = [
+      1: Plan(weights: [0.50, 0.50, 0.50, 0.50, 0.50], reps: [5,5,5,5,5]),
+      2: Plan(weights: [0.50, 0.50, 0.50, 0.50, 0.50], reps: [5,5,5,5,5]),
+      3: Plan(weights: [0.50, 0.50, 0.50, 0.50, 0.50], reps: [5,5,5,5,5]),
+      4: Plan(weights: [0.50, 0.50, 0.50, 0.50, 0.50], reps: [5,5,5,5,5])
+    ]
+    
+    guard let set = values[week]
+    else {
+      return .empty
+    }
+      
+    return set.newSet(oneRepMax: oneRepMax)
+  }
 //  func getSets(week: Int) -> Set {
 //    let values = [
 //      1: [5,5,5,5,5],

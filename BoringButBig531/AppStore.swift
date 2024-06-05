@@ -22,6 +22,10 @@ final class AppStore: ObservableObject {
     return lift.getPlan(week: self.selectedWeek)
   }
   
+  func getBBBPlan(lift: Lift) -> Plan {
+    return lift.getPlan(week: self.selectedWeek)
+  }
+  
   func getLift(name: LiftType) -> Lift? {
     for lift in lifts {
       if lift.name == name {

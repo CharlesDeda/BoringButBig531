@@ -20,14 +20,36 @@ struct PlanView: View {
     appStore.getPlan(lift: lift)
   }
   
+  var bbbPlan: Plan {
+    appStore.getBBBPlan(lift: lift)
+  }
   
   var body: some View {
-    Table(of: Plan.self) {
-      TableColumn("Weight", value: \.weights.description)
-      TableColumn("Reps", value: \.reps.description)
-    } rows: {
-      TableRow(plan)
+    VStack {
+      List {
+        Section("5/3/1") {
+          ForEach(plan.weights.indices) { index in
+            HStack {
+              Text(plan.weights[index], format: .number)
+              Text("\(plan.reps[index])")
+                .frame(maxWidth: .infinity, alignment: .trailing)
+            }
+          }
+        }
+      }
+      List {
+        Section("Boring But Big") {
+          ForEach(bbbPlan.weights.indices) { index in
+            HStack {
+              Text(bbbPlan.weights[index], format: .number)
+              Text("\(bbbPlan.reps[index])")
+                .frame(maxWidth: .infinity, alignment: .trailing)
+            }
+          }
+        }
+      }
     }
+    .navigationTitle("Boring But Big")
   }
 }
 
