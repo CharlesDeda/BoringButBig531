@@ -23,12 +23,14 @@ struct ProfileView: View {
                   .bold()
                   .frame(width: 80, alignment: .leading)
                 TextField("\(value.weight)", value: $value.weight, formatter: NumberFormatter())
+                  .keyboardType(.decimalPad)
               }
               HStack {
                 Text("Reps")
                   .bold()
                   .frame(width: 80, alignment: .leading)
                 TextField("\(value.reps)", value: $value.reps, formatter: NumberFormatter())
+                  .keyboardType(.decimalPad)
               }
               HStack {
                 Text("1rm")
