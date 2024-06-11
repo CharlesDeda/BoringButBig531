@@ -1,9 +1,15 @@
 import SwiftUI
 
 struct ProfileView: View {
-  @StateObject var appStore: AppStore
+  @ObservedObject var appStore: AppStore
+  @State var lifts: [Lift]
   let columns = [GridItem(.flexible(), spacing: 0), GridItem(.flexible(), spacing: 0)]
   @Environment(\.dismiss) var dismiss
+  
+  init(appStore: AppStore) {
+    self.appStore = appStore
+    self.lifts = appStore.lifts
+  }
   
   var body: some View {
     NavigationStack {
@@ -14,16 +20,26 @@ struct ProfileView: View {
         .frame(width: 200, alignment: .trailing)
       ScrollView {
         LazyVGrid(columns: columns, spacing: 0) {
-          ForEach($appStore.lifts) { $value in
+          ForEach($lifts) { $value in
             VStack {
-              Text(value.name.description)
+              Text(value.liftType.description)
                 .font(.headline)
               HStack {
                 Text("Weight")
                   .bold()
                   .frame(width: 80, alignment: .leading)
-                TextField("\(value.weight)", value: $value.weight, formatter: NumberFormatter())
-                  .keyboardType(.decimalPad)
+                TextField("\(value.weight)",
+                          value: $value.weight,
+                          //                          value: Binding<Double>(
+                          //                            get: { return value.weight },
+                          //                            set: { newValue in
+                          //                              var lift = value
+                          //                              lift.weight = newValue
+                          //                              appStore.updateLift(lift)
+                          //                            }),
+                          formatter: NumberFormatter()
+                )
+                .keyboardType(.decimalPad)
               }
               HStack {
                 Text("Reps")
@@ -61,6 +77,7 @@ struct ProfileView: View {
             .toolbar {
               ToolbarItem(placement: .confirmationAction) {
                 Button("Save") {
+                  appStore.updateLifts(lifts)
                   dismiss()
                 }
               }

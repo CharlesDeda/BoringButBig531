@@ -41,7 +41,7 @@ struct PlanView: View {
 struct PlanView_Previews: PreviewProvider {
   static var previews: some View {
     NavigationStack {
-      PlanView(lift: Lift(id: UUID(), name: .deadlift), appStore: AppStore())
+      PlanView(lift: Lift(id: UUID(), liftType: .deadlift), appStore: AppStore())
     }
   }
 }

@@ -5,10 +5,10 @@ final class AppStore: ObservableObject {
   @Published var isSheetPresented = false
   
   @Published var lifts: [Lift] = [
-    Lift(id: UUID(), name: .deadlift),
-    Lift(id: UUID(), name: .squat),
-    Lift(id: UUID(), name: .bench),
-    Lift(id: UUID(), name: .press)
+    .fetch(liftType: .deadlift),
+    .fetch(liftType: .squat),
+    .fetch(liftType: .bench),
+    .fetch(liftType: .press)
   ]
   
   @Published var name: String = ""
@@ -23,15 +23,37 @@ final class AppStore: ObservableObject {
   }
   
   func getBBBPlan(lift: Lift) -> Plan {
-    return lift.getPlan(week: self.selectedWeek)
+    return lift.getBBB(week: self.selectedWeek)
   }
   
   func getLift(name: LiftType) -> Lift? {
     for lift in lifts {
-      if lift.name == name {
+      if lift.liftType == name {
         return lift
       }
     }
     return nil
+  }
+  
+  func updateLift(_ newValue: Lift) {
+    guard let index = lifts.firstIndex(where: { $0.id == newValue.id }),
+          lifts[index] != newValue
+    else { return }
+    
+    // we have a new lift with changed values
+    // 1. we update our internal array of lifts
+    // 2. we store this new lift into the persistence
+    lifts[index] = newValue
+    Lift.store(lift: newValue)
+  }
+  
+  /**
+   we have a new lift with changed values
+   1. we update our internal array of lifts
+   2. we store this new lift into the persistence
+   */
+  func updateLifts(_ newValue: [Lift]) {
+    lifts = newValue
+    lifts.forEach(Lift.store(lift:))
   }
 }
