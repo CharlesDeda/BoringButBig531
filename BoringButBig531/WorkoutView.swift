@@ -17,7 +17,7 @@ struct WorkoutView: View {
     List {
       ForEach(appStore.lifts) { lift in
         Section(lift.weekday) {
-          NavigationLink(lift.liftType.description) {
+          NavigationLink(lift.liftCompliments) {
             PlanView(lift: appStore.getLift(name: lift.liftType) ?? Lift(id: UUID(), liftType: .deadlift), appStore: appStore)
           }
         }

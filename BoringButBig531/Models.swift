@@ -80,7 +80,7 @@ struct Lift: Identifiable, Equatable {
       1: Plan(weights: [0.50, 0.50, 0.50, 0.50, 0.50], reps: [10,10,10,10,10]),
       2: Plan(weights: [0.50, 0.50, 0.50, 0.50, 0.50], reps: [10,10,10,10,10]),
       3: Plan(weights: [0.50, 0.50, 0.50, 0.50, 0.50], reps: [10,10,10,10,10]),
-      4: Plan(weights: [0.50, 0.50, 0.50, 0.50, 0.50], reps: [10,10,10,10,10])
+      4: Plan(weights: [0.50, 0.50, 0.50, 0.50, 0.50], reps: [5,5,5,5,5])
     ]
     
     guard let set = values[week]
@@ -138,11 +138,38 @@ extension Lift {
       return "Friday"
     }
   }
+}
 
-  struct ExerciseSet {
-    let sets: [Int]
+extension Lift {
+  var liftCompliments: String {
+    switch liftType {
+      
+    case .deadlift:
+      return "Deadlift/Squat"
+    case .squat:
+      return "Squat/Deadlift"
+    case .bench:
+      return "Bench/Press"
+    case .press:
+      return "Press/Bench"
+    }
   }
 }
+
+enum ProfileFocus: Hashable {
+  case name
+  case weight(Lift.ID)
+  case reps(Lift.ID)
+  
+  var liftID: Lift.ID? {
+    switch self {
+    case .name:             return nil
+    case let .weight(uuid): return uuid
+    case let .reps(uuid):   return uuid
+    }
+  }
+}
+
 
 // MARK: - Persistence -
 extension Lift: Codable {
@@ -168,7 +195,6 @@ extension Lift: Codable {
   static func fetch(liftType: LiftType) -> Self {
     let jsonFileUrl = liftType.jsonFileUrl
 
-    print("lift: \(jsonFileUrl.path)")
     do {
       let data = try Data.init(contentsOf: jsonFileUrl)
       let decoder = JSONDecoder()
@@ -198,7 +224,7 @@ extension Lift: Codable {
       let json = String.init(data: data, encoding: .utf8) ?? ""
       print("lift: \(json)")
     } catch {
-      print("error: \(error)")
+      print("lift: \(error)")
     }
   }
 }

@@ -11,9 +11,11 @@ final class AppStore: ObservableObject {
     .fetch(liftType: .press)
   ]
   
+  
   @Published var name: String = ""
   let selectedWeek = 1
 
+  
   var isProfileComplete: Bool {
     !lifts.allSatisfy { $0.oneRepMax == 0 }
   }
@@ -46,6 +48,7 @@ final class AppStore: ObservableObject {
     lifts[index] = newValue
     Lift.store(lift: newValue)
   }
+  
   
   /**
    we have a new lift with changed values

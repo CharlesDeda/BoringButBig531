@@ -8,9 +8,11 @@ struct HomeView: View {
     NavigationStack {
       List {
         ForEach(weeks, id: \.self) { value in
-          HStack {
-            NavigationLink("Week \(value)") {
-              WorkoutView(appStore: appStore, selectedWeek: value)
+          Section {
+            HStack {
+              NavigationLink("Week \(value)") {
+                WorkoutView(appStore: appStore, selectedWeek: value)
+              }
             }
           }
         }
