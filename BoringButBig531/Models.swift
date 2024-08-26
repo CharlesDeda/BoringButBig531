@@ -1,16 +1,10 @@
 import Foundation
 
-/*
- We want to represent each week with a number of reps per set
- week 1: 5,5,5,5,5
- week 2: 5,5,3,5,5
- week 3: 5,3,1,3,5
- week 4: 5,3,3,3,3
- */
 
 /*
   
  */
+
 struct Plan: Identifiable {
   let id = UUID()
   static var empty: Self = .init(weights: [0,0,0,0,0], reps: [0,0,0,0,0])
@@ -27,13 +21,6 @@ struct Plan: Identifiable {
     return copy
   }
 }
-
-
-//func getReps(_ lift: Lift) -> (_ week: Int) -> Set? {
-//}
-//
-//func getReps(_ store: AppStore) -> (_ lift: List) -> (_ week: Int) -> Set? {
-//}
 
 /**
  A lift is of a type either a squat, bench, deadlift, or overhead press
