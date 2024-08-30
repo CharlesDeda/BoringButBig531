@@ -19,6 +19,7 @@
 		F9D6D4A42C065D210027C8F6 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D6D4A32C065D210027C8F6 /* Models.swift */; };
 		F9D6D4A62C065FCA0027C8F6 /* EmptyProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D6D4A52C065FCA0027C8F6 /* EmptyProfileView.swift */; };
 		F9D6D4AA2C0661590027C8F6 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D6D4A92C0661590027C8F6 /* HomeView.swift */; };
+		F9F8E1972C824672003AD80D /* 531-ezgif.com-resize.gif in Resources */ = {isa = PBXBuildFile; fileRef = F9F8E1962C824672003AD80D /* 531-ezgif.com-resize.gif */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		F9D6D4A32C065D210027C8F6 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		F9D6D4A52C065FCA0027C8F6 /* EmptyProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyProfileView.swift; sourceTree = "<group>"; };
 		F9D6D4A92C0661590027C8F6 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		F9F8E1962C824672003AD80D /* 531-ezgif.com-resize.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "531-ezgif.com-resize.gif"; path = "../../../../../Downloads/531-ezgif.com-resize.gif"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 				F92B2CE12C0752B3002DE499 /* WorkoutView.swift */,
 				F92B2CE42C075FEB002DE499 /* PlanView.swift */,
 				F9D6D4A32C065D210027C8F6 /* Models.swift */,
+				F9F8E1952C82465B003AD80D /* gitAssets */,
 				F9D6D4962C0647F60027C8F6 /* Assets.xcassets */,
 				F9D6D4982C0647F60027C8F6 /* Preview Content */,
 			);
@@ -89,6 +92,14 @@
 				F9D6D4992C0647F60027C8F6 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		F9F8E1952C82465B003AD80D /* gitAssets */ = {
+			isa = PBXGroup;
+			children = (
+				F9F8E1962C824672003AD80D /* 531-ezgif.com-resize.gif */,
+			);
+			path = gitAssets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -150,6 +161,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F9D6D49A2C0647F60027C8F6 /* Preview Assets.xcassets in Resources */,
+				F9F8E1972C824672003AD80D /* 531-ezgif.com-resize.gif in Resources */,
 				F9D6D4972C0647F60027C8F6 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
